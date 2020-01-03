@@ -1,12 +1,28 @@
 import React from "react"
 import Layout from "../components/layout/layout"
+import { graphql, useStaticQuery, Link } from "gatsby"
 
-import { Link } from "gatsby"
-export default function blog() {
+const Blog = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      allMarkdownRemark {
+        edges {
+          node {
+            frontmatter {
+              title
+              date
+            }
+          }
+        }
+      }
+    }
+  `)
+  console.log(data)
   return (
     <Layout>
-      <h1>This is my personal blog website </h1>
+      <h3>This is my blogpage</h3>
       <Link to="/">Go back</Link>
     </Layout>
   )
 }
+export default Blog
